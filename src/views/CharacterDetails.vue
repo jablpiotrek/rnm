@@ -17,6 +17,19 @@
         <div>
           <span>Status: </span><span class="font-semibold">{{ details.status }}</span>
         </div>
+        <div>
+          <span>Gender: </span><span class="font-semibold">{{ details.gender }}</span>
+        </div>
+        <div>
+          <span>Origin: </span><span class="font-semibold">{{ details.origin.name }}</span>
+        </div>
+        <div>
+          <span>Location: </span><span class="font-semibold">{{ details.location.name }}</span>
+        </div>
+        <div>
+          <span>Number of episodes: </span
+          ><span class="font-semibold">{{ details.episode.length }}</span>
+        </div>
       </div>
     </div>
     <img

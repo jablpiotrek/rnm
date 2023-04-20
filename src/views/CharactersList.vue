@@ -42,17 +42,32 @@ import LoadingState from '@/components/LoadingState.vue'
 import CharacterItem from '@/components/CharacterItem.vue'
 import FilterComponent from '@/components/FilterComponent.vue'
 
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useCharactersStore } from '@/stores/characters'
 import { storeToRefs } from 'pinia'
+
+const route = useRoute()
+const router = useRouter()
 
 const charactersStore = useCharactersStore()
 const { list, pages, isLoading, filter, page } = storeToRefs(charactersStore)
 
+watch(page, (newPage) => {
+  if (`${newPage}` !== route.query.page) {
+    router.push({ name: 'characters-list', query: newPage > 1 ? { page: newPage } : {} })
+  }
+})
+
 onMounted(async () => {
   if (!list.value.length) {
+    const pageFromQuery = parseInt(typeof route.query.page === 'string' ? route.query.page : '1')
+
+    if (pageFromQuery > 0) {
+      page.value = pageFromQuery
+    }
     await charactersStore.loadCharacters({
-      page: 1,
+      page: page.value,
       filter: { name: '', status: CharacterStatus.all }
     })
   }

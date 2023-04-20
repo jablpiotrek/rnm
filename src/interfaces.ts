@@ -5,6 +5,14 @@ export interface Character {
   species: string
   image: string
   status: string
+  gender: string
+  origin: {
+    name: string
+  }
+  location: {
+    name: string
+  }
+  episode: string[]
 }
 
 export interface Filter {

@@ -49,6 +49,7 @@
       <div class="flex flex-col w-full mt-2 sm:flex-row">
         <button
           class="btn-action mb-2 sm:mb-0 sm:w-32 sm:grow-0 sm:mr-2"
+          type="button"
           @click="updateFilters"
           :disabled="disabled"
         >

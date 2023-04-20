@@ -14,7 +14,14 @@ const router = createRouter({
     {
       path: '/character/:id',
       name: 'character-details',
-      component: CharacterDetails
+      component: CharacterDetails,
+      beforeEnter: (to, from, next) => {
+        if (to.params.id) {
+          next()
+        } else {
+          next({ name: 'characters-list' })
+        }
+      }
     },
     { path: '/:pathMatch(.*)', redirect: { name: 'characters-list' } }
   ]
